@@ -37,11 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('TO DO'),
+        title: Text('TO DO'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
       body: ListView.builder(
           itemCount: db.todoList.length,
@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               taskComplete: db.todoList[index][1],
               onChanged: (value) => checkBoxChanged(value, index),
               deleteFunction: (context) => deleteTask(index),
+              delete: () => deleteTask(index),
             );
           }),
     );
