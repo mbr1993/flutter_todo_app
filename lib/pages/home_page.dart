@@ -32,28 +32,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber[100],
+      backgroundColor: Colors.amber[50],
       appBar: AppBar(
-        centerTitle: false,
+        leading: Icon(Icons.menu),
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text('TO DO'),
+        centerTitle: true,
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
         child: Icon(Icons.add),
       ),
-      body: ListView.builder(
-          itemCount: db.todoList.length,
-          itemBuilder: (context, index) {
-            return ToDoTile(
-              taskName: db.todoList[index][0],
-              taskComplete: db.todoList[index][1],
-              onChanged: (value) => checkBoxChanged(value, index),
-              deleteFunction: (context) => deleteTask(index),
-              delete: () => deleteTask(index),
-            );
-          }),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: Text(
+              "You have ${db.todoList.length} tasks to do!",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: db.todoList.length,
+              itemBuilder: (context, index) {
+                return ToDoTile(
+                  taskName: db.todoList[index][0],
+                  taskComplete: db.todoList[index][1],
+                  onChanged: (value) => checkBoxChanged(value, index),
+                  deleteFunction: (context) => deleteTask(index),
+                  delete: () => deleteTask(index),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
