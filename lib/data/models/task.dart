@@ -29,9 +29,9 @@ class Task extends Equatable {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-      title: map['title'] ?? '',
-      isDone: map['isDone'],
-      isDeleted: map['isDeleted'],
+      title: map['title'] as String,
+      isDone: map['isDone'] as bool,
+      isDeleted: map['isDeleted'] as bool,
     );
   }
 

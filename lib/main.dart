@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_app/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'pages/home_page.dart';
+
+import 'features/dashboard/presentation/cubit/bottom_nav_cubit.dart';
 
 void main() async {
-  //init hive
   await Hive.initFlutter();
-  //open box
-  var box = await Hive.openBox('myBox');
-  runApp( MyApp());
+
+  Box<dynamic> box = await Hive.openBox('myBox');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,9 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
-        useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: BlocProvider<BottomNavCubit>(
+        create: (context) => BottomNavCubit(),
+        child: DashboardPage(),
+      ),
     );
   }
 }

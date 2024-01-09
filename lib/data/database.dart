@@ -1,13 +1,13 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ToDoDatabase {
-  List todoList = [];
+  List<dynamic> todoList = [];
 
   //reference our box
-  final _myBox = Hive.box('myBox');
+  final Box<dynamic> _myBox = Hive.box('myBox');
 
   //run this method if it is a first time ever opening this app
-  createInitialData() {
+  void createInitialData() {
     todoList = [
       ['Reading a book', false],
       ['Create your first task', false],
@@ -15,12 +15,12 @@ class ToDoDatabase {
   }
 
   //load the data from database
-  loadData() {
-    todoList = _myBox.get('TODOLIST');
+  void loadData() {
+    todoList = _myBox.get('TODOLIST') as List<dynamic>;
   }
 
   //update the database
-  updateData() {
+  void updateData() {
     _myBox.put('TODOLIST', todoList);
   }
 }

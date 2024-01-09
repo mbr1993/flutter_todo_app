@@ -4,9 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class ToDoTile extends StatelessWidget {
   final String taskName;
   final bool taskComplete;
-  Function(bool?)? onChanged;
-  Function(BuildContext)? deleteFunction;
-  VoidCallback delete;
+  final void Function(bool?)? onChanged;
+  final void Function(BuildContext)? deleteFunction;
+  final VoidCallback delete;
 
   ToDoTile(
       {super.key,
@@ -44,10 +44,7 @@ class ToDoTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   taskName,
-                  style: TextStyle(
-                      decoration: taskComplete
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none),
+                  style: TextStyle(decoration: taskComplete ? TextDecoration.lineThrough : TextDecoration.none),
                 ),
               ),
               IconButton(

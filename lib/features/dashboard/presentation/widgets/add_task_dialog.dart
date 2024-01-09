@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/utils/my_button.dart';
 
 class AddTaskDialog extends StatelessWidget {
-  final controller;
-  VoidCallback onSave;
-  VoidCallback cancel;
+  AddTaskDialog({required this.controller, required this.cancel, required this.onSave, super.key});
 
-  AddTaskDialog({super.key, required this.controller, required this.cancel, required this.onSave});
+  final TextEditingController controller;
+  final VoidCallback onSave;
+  final VoidCallback cancel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +33,21 @@ class AddTaskDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              MyButton(text: 'Cancel', onPressed: cancel),
+              myButton(text: 'Cancel', onPressed: cancel),
               const SizedBox(width: 10),
-              MyButton(text: 'Save', onPressed: onSave),
+              myButton(text: 'Save', onPressed: onSave),
             ],
           )
         ],
       ),
+    );
+  }
+
+  Widget myButton({required String text, required VoidCallback onPressed}) {
+    return MaterialButton(
+      color: Colors.amber,
+      onPressed: onPressed,
+      child: Text(text),
     );
   }
 }
